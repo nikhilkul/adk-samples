@@ -37,8 +37,8 @@ This agent showcases Multi Agent setup with tool calling and web crawling
 
 1. **Prerequisites:**
     * Python 3.11+
-    * Poetry
-        * For dependency management and packaging. Please follow the instructions on the official [Poetry website](https://python-poetry.org/docs/) for installation.
+    * uv
+        * For dependency management and packaging. Please follow the instructions on the official [uv website](https://docs.astral.sh/uv/) for installation.
     * A project on Google Cloud Platform
     * Get your API key from [here](https://aistudio.google.com).(Not needed if you want to use Gemini from Vertex AI)
 
@@ -80,7 +80,7 @@ This agent showcases Multi Agent setup with tool calling and web crawling
         # 1. Creates and activates a new virtual env
         # 2. Installs python packages
         # 3. Populates BigQuery data using variables set in `.env` file
-        sh deployment/run.sh
+        uv sync --dev
         `````
 
     * Set `DISABLE_WEB_DRIVER=0`
@@ -149,6 +149,33 @@ python deployment/deploy.py --create
 ```
 
 You may also modify the deployment script for your use cases.
+
+### Alternative: Using Agent Starter Pack
+
+You can also use the [Agent Starter Pack](https://goo.gle/agent-starter-pack) to create a production-ready version of this agent with additional deployment options:
+
+```bash
+# Create and activate a virtual environment
+python -m venv .venv && source .venv/bin/activate # On Windows: .venv\Scripts\activate
+
+# Install the starter pack and create your project
+pip install --upgrade agent-starter-pack
+agent-starter-pack create my-brand-search-optimization -a adk@brand-search-optimization
+```
+
+<details>
+<summary>⚡️ Alternative: Using uv</summary>
+
+If you have [`uv`](https://github.com/astral-sh/uv) installed, you can create and set up your project with a single command:
+```bash
+uvx agent-starter-pack create my-brand-search-optimization -a adk@brand-search-optimization
+```
+This command handles creating the project without needing to pre-install the package into a virtual environment.
+
+</details>
+
+The starter pack will prompt you to select deployment options and provides additional production-ready features including automated CI/CD deployment scripts.
+
 
 ## Customization
 
